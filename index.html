@@ -14,7 +14,15 @@
         <div class="container"id="app">
             <div class="row">
                 <div class="col">
-                    <h1>Hello, world!</h1>
+                    <img :src="image"/>
+                    <h4>Current Player: {{currentPlayer.name}}</h4>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li v-for="player in players"@click="makeCurrent(player)">
+                            {{player.name}}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -22,29 +30,29 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
     <script>
-        let size = 20;
-        $(function(){
-            $("h1").on("click", function(){
-                size+=20;
-                $(this).css({fontSize:size});
-            });
-        });
-        /*var person1={
-            name:"Tim",
-            age:41,
-            car:{
-                make:"Ford",
-                year:"2013"
-            },
-            children: [{name: "Binyamin"}, {name: "Rafi"}]
-        };*/
         const v = new Vue({
-            el: "#app"
+            el: "#app",
+            data: function(){
+                return{
+                    image: "https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350",
+                    players: [
+                        {name: "Tim"},
+                        {name: "Moshe"},
+                        {name: "Faizan"},
+                        {name: "Donald"}
+                    ],
+                    currentPlayer: {}
+                }
+            },
+            methods: {
+                makeCurrent: function(player){
+                    this.currentPlayer = player;
+                }
+            }
         });
     </script>
   </body>
